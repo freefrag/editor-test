@@ -30,7 +30,7 @@ public class ConfigModule {
     }
 
     @Provides
-    Map<String, String> provideServiceDiscovery() {
+    final Map<String, String> provideServiceDiscovery() {
         return configuration.getServiceDiscovery();
     }
 }
