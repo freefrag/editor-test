@@ -1,0 +1,41 @@
+// =======
+// Plugins
+// =======
+apply from: "$rootDir/gradle/repositories.gradle"
+apply plugin: 'java'
+apply plugin: "org.inferred.processors"
+
+// ============
+// Dependencies
+// ============
+dependencies {
+    runtime files('src/main/resources/app')
+    compile project(':dropwizard-test-api')
+    compile "io.dropwizard:dropwizard-assets"
+    compile "io.dropwizard:dropwizard-core"
+    compile "io.dropwizard:dropwizard-jdbi"
+
+    compile "org.antlr:stringtemplate"
+    compile "org.postgresql:postgresql"
+    compile "org.glassfish.jersey.core:jersey-client"
+    compile "commons-codec:commons-codec"
+    compile "com.google.guava:guava"
+    compile "org.apache.directory.studio:org.apache.commons.io"
+
+    compile "org.immutables:value"
+    processor "org.immutables:value"
+
+    compile 'io.jsonwebtoken:jjwt'
+
+    compile 'io.github.openfeign:feign-core'
+    compile 'io.github.openfeign:feign-jackson'
+    compile 'io.github.openfeign:feign-jaxrs'
+
+    compile "com.palantir.indexpage:dropwizard-index-page"
+    compile "com.google.dagger:dagger"
+    compile "com.google.dagger:dagger-compiler"
+    processor "com.google.dagger:dagger-compiler"
+
+    testCompile "io.dropwizard:dropwizard-testing"
+    testCompile "org.mockito:mockito-all"
+}

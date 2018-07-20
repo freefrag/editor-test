@@ -1,0 +1,33 @@
+// =======
+// Plugins
+// =======
+apply from: "$rootDir/gradle/repositories.gradle"
+apply plugin: 'java'
+apply plugin: "org.inferred.processors"
+
+// ============
+// Dependencies
+// ============
+dependencies {
+    compile "io.dropwizard:dropwizard-core"
+    compile "io.dropwizard:dropwizard-jdbi"
+
+    compile "org.antlr:stringtemplate"
+    compile "org.postgresql:postgresql"
+    compile "org.glassfish.jersey.core:jersey-client"
+    compile "commons-codec:commons-codec"
+    compile "com.google.guava:guava"
+    compile "org.apache.directory.studio:org.apache.commons.io"
+
+    compile "org.immutables:value"
+    processor "org.immutables:value"
+
+    testCompile "io.dropwizard:dropwizard-testing"
+    testCompile "org.mockito:mockito-all"
+}
+
+task hack {
+  configurations.each {
+    print it.toString() + "\n"
+  }
+}

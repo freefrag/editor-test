@@ -1,0 +1,5 @@
+rootProject.name = 'dropwizard-test'
+
+include 'dropwizard-test-api'
+include 'dropwizard-test-server'
+include 'dropwizard-test-distribution'
