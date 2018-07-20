@@ -31,7 +31,6 @@ dependencies {
     compile 'io.github.openfeign:feign-jackson'
     compile 'io.github.openfeign:feign-jaxrs'
 
-    compile "com.palantir.indexpage:dropwizard-index-page"
     compile "com.google.dagger:dagger"
     compile "com.google.dagger:dagger-compiler"
     processor "com.google.dagger:dagger-compiler"

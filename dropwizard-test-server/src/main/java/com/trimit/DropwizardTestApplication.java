@@ -46,9 +46,7 @@ public final class DropwizardTestApplication extends Application<DropwizardTestC
                 .configModule(new ConfigModule(configuration))
                 .build();
 
-
         environment.jersey().setUrlPattern("/api/*");
         environment.jersey().register(serverComponent.helloWorldResource());
-
     }
 }

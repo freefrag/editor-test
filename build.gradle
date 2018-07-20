@@ -37,22 +37,24 @@ apply plugin: 'com.palantir.baseline-config'
 apply plugin: 'com.palantir.baseline-idea'
 
 allprojects {
-    group 'com.trimit'
-    version gitVersion()
+  group 'com.trimit'
+  version gitVersion()
+  sourceCompatibility = '1.8'
+  targetCompatibility = '1.8'
 
-    apply plugin: 'com.palantir.configuration-resolver'
-    apply plugin: 'nebula.dependency-recommender'
+  apply plugin: 'com.palantir.configuration-resolver'
+  apply plugin: 'nebula.dependency-recommender'
 
-    dependencyRecommendations {
-        strategy OverrideTransitives
-        propertiesFile file: project.rootProject.file('versions.props')
-    }
+  dependencyRecommendations {
+      strategy OverrideTransitives
+      propertiesFile file: project.rootProject.file('versions.props')
+  }
 
-    configurations.all {
-        resolutionStrategy {
-            failOnVersionConflict()
-        }
-    }
+  configurations.all {
+      resolutionStrategy {
+          failOnVersionConflict()
+      }
+  }
 }
 
 subprojects {
@@ -62,8 +64,8 @@ subprojects {
   apply plugin: 'com.palantir.baseline-idea'
   apply plugin: 'org.inferred.processors'
 
-  sourceCompatibility = '1.8'
-  targetCompatibility = '1.8'
+  sourceCompatibility = '8'
+  targetCompatibility = '8'
 
   dependencies {
     nebulaRecommenderBom 'io.dropwizard:dropwizard-bom:1.3.2@pom'
