@@ -1,3 +1,7 @@
+## Build Artifacts ###
+build/
+generated_src/
+
 ### Dropwizard ###
 *.log
 
@@ -12,7 +16,6 @@
 
 ### Gradle ###
 /.gradle/
-/build/
 
 ### Intellij ###
 .idea/
