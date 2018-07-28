@@ -8,11 +8,6 @@ jobs:
     docker:
       # specify the version you desire here
       - image: google/cloud-sdk
-		steps:
-      - run:
-          name: Store Service Account
-          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
-      
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
