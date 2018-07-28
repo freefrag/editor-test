@@ -21,7 +21,6 @@ jobs:
       TERM: dumb
       # GKE Options
       GCLOUD_COMPUTE_ZONE: europe-west1-b
-      GCLOUD_PROJECT_NAME: Test
       GCLOUD_PROJECT_ID: scenic-style-210822
     steps:
       - checkout
@@ -41,7 +40,7 @@ jobs:
       - run:
           name: build docker image
           command: |
-            docker build -t "eu.gcr.io/${GCLOUD_PROJECT_NAME}/editor_test:${GIT_VERSION}" .
-            docker tag "eu.gcr.io/${GCLOUD_PROJECT_NAME}/editor_test:${GIT_VERSION}" "eu.gcr.io/${GCLOUD_PROJECT_NAME}/editor_test:latest"
-            gcloud docker -- push "eu.gcr.io/${PROJECT_NAME}/editor_test"
+            docker build -t "eu.gcr.io/${GCLOUD_PROJECT_ID}/editor_test:${GIT_VERSION}" .
+            docker tag "eu.gcr.io/${GCLOUD_PROJECT_ID}/editor_test:${GIT_VERSION}" "eu.gcr.io/${GCLOUD_PROJECT_ID}/editor_test:latest"
+            gcloud docker -- push "eu.gcr.io/${PROJECT_ID}/editor_test"
 
