@@ -10,5 +10,5 @@ COPY --from=compile dropwizard-test-distribution/build/distributions/*.tar /
 
 RUN tar -xf dropwizard-test-distribution-*.tar
 
-CMD dropwizard-test-distribution-*/bin/dropwizard-test-distribution server
+CMD cd dropwizard-test-distribution-* && ./bin/dropwizard-test-distribution server var/conf/server.yml
 
