@@ -43,5 +43,5 @@ jobs:
             docker tag "eu.gcr.io/${GCLOUD_PROJECT_ID}/editor_test:${GIT_VERSION}" "eu.gcr.io/${GCLOUD_PROJECT_ID}/editor_test:latest"
       - run:
           name: Upload to registry
-          command: docker push "eu.gcr.io/${PROJECT_ID}/editor_test"
+          command: docker push "eu.gcr.io/${GCLOUD_PROJECT_ID}/editor_test"
 
