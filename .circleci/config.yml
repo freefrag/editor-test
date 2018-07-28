@@ -7,7 +7,11 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
+      - image: google/cloud-sdk
+		steps:
+      - run:
+          name: Store Service Account
+          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -20,23 +24,30 @@ jobs:
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
       TERM: dumb
+      # GKE Options
+      GCLOUD_PROJECT_NAME: Test
+      GCLOUD_PROJECT_ID: scenic-style-210822
+      GCLOUD_PROJECT_COMPUTE_ZONE: europe-west1-b
     
     steps:
       - checkout
+      - run:
+          name: export git version
+          command: export GIT_VERSION=$(git describe --tags)
+      - run:
+          name: Store Service Account Key
+          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+      - run:
+          name: Set up gcloud
+          command: |
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            gcloud --quiet config set project ${GCLOUD_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GCLOUD_COMPUTE_ZONE}
+            gcloud --quiet auth configure-docker
+      - run:
+          name: build docker image
+          command: |
+            docker build -t "eu.gcr.io/${GCLOUD_PROJECT_NAME}/editor_test:${GIT_VERSION}" .
+            docker tag "eu.gcr.io/${GCLOUD_PROJECT_NAME}/editor_test:${GIT_VERSION}" "eu.gcr.io/${GCLOUD_PROJECT_NAME}/editor_test:latest"
+            gcloud docker -- push "eu.gcr.io/${PROJECT_NAME}/editor_test"
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: ./gradlew dependencies
-
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
-        
-      # run tests!
-      - run: ./gradlew test
