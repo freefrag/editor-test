@@ -24,6 +24,12 @@ jobs:
       GCLOUD_PROJECT_ID: scenic-style-210822
     steps:
       - checkout
+      - run:
+          name: Test Project
+          command: ./gradlew test
+      - run:
+          name: Build Distribution
+          command: ./gradlew distTar
       - setup_remote_docker
       - run:
           name: Store Service Account Key
