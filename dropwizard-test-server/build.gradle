@@ -3,7 +3,7 @@
 // =======
 apply from: "$rootDir/gradle/repositories.gradle"
 apply plugin: 'java'
-apply plugin: "org.inferred.processors"
+apply plugin: 'org.inferred.processors'
 
 // ============
 // Dependencies
@@ -11,19 +11,19 @@ apply plugin: "org.inferred.processors"
 dependencies {
     runtime files('src/main/resources/app')
     compile project(':dropwizard-test-api')
-    compile "io.dropwizard:dropwizard-assets"
-    compile "io.dropwizard:dropwizard-core"
-    compile "io.dropwizard:dropwizard-jdbi"
+    compile 'io.dropwizard:dropwizard-assets'
+    compile 'io.dropwizard:dropwizard-core'
+    compile 'io.dropwizard:dropwizard-jdbi'
 
-    compile "org.antlr:stringtemplate"
-    compile "org.postgresql:postgresql"
-    compile "org.glassfish.jersey.core:jersey-client"
-    compile "commons-codec:commons-codec"
-    compile "com.google.guava:guava"
-    compile "org.apache.directory.studio:org.apache.commons.io"
+    compile 'org.antlr:stringtemplate'
+    compile 'org.postgresql:postgresql'
+    compile 'org.glassfish.jersey.core:jersey-client'
+    compile 'commons-codec:commons-codec'
+    compile 'com.google.guava:guava'
+    compile 'org.apache.directory.studio:org.apache.commons.io'
 
-    compile "org.immutables:value"
-    processor "org.immutables:value"
+    compile 'org.immutables:value'
+    processor 'org.immutables:value'
 
     compile 'io.jsonwebtoken:jjwt'
 
@@ -31,10 +31,15 @@ dependencies {
     compile 'io.github.openfeign:feign-jackson'
     compile 'io.github.openfeign:feign-jaxrs'
 
-    compile "com.google.dagger:dagger"
-    compile "com.google.dagger:dagger-compiler"
-    processor "com.google.dagger:dagger-compiler"
 
-    testCompile "io.dropwizard:dropwizard-testing"
-    testCompile "org.mockito:mockito-all"
+    compile 'com.google.dagger:dagger'
+    compile 'com.google.dagger:dagger-compiler'
+    processor 'com.google.dagger:dagger-compiler'
+
+    /* Java 9 dependencies */
+    compile 'javax.xml.bind:jaxb-api'
+    compile 'javax.activation:activation'
+
+    testCompile 'io.dropwizard:dropwizard-testing'
+    testCompile 'org.mockito:mockito-all'
 }
