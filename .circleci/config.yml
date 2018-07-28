@@ -20,10 +20,9 @@ jobs:
       JVM_OPTS: -Xmx3200m
       TERM: dumb
       # GKE Options
+      GCLOUD_COMPUTE_ZONE: europe-west1-b
       GCLOUD_PROJECT_NAME: Test
       GCLOUD_PROJECT_ID: scenic-style-210822
-      GCLOUD_PROJECT_COMPUTE_ZONE: europe-west1-b
-    
     steps:
       - checkout
       - run:
