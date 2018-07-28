@@ -1,6 +1,6 @@
 FROM  openjdk:10-jdk-slim
 
-COPY dropwizard-test-distribution/build/distributions/dropwizard-test-distribution-*.tar /
+COPY dropwizard-test-distribution/build/distributions/*.tar /
 
 RUN tar -xf dropwizard-test-distribution-*.tar
 
