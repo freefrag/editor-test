@@ -41,5 +41,7 @@ jobs:
             export GIT_VERSION=$(git describe --tags)
             docker build -t "eu.gcr.io/${GCLOUD_PROJECT_ID}/editor_test:${GIT_VERSION}" .
             docker tag "eu.gcr.io/${GCLOUD_PROJECT_ID}/editor_test:${GIT_VERSION}" "eu.gcr.io/${GCLOUD_PROJECT_ID}/editor_test:latest"
-            docker push "eu.gcr.io/${PROJECT_ID}/editor_test"
+      - run:
+          name: Upload to registry
+          command: docker push "eu.gcr.io/${PROJECT_ID}/editor_test"
 
