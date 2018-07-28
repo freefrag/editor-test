@@ -41,5 +41,5 @@ jobs:
             export GIT_VERSION=$(git describe --tags)
             docker build -t "eu.gcr.io/${GCLOUD_PROJECT_ID}/editor_test:${GIT_VERSION}" .
             docker tag "eu.gcr.io/${GCLOUD_PROJECT_ID}/editor_test:${GIT_VERSION}" "eu.gcr.io/${GCLOUD_PROJECT_ID}/editor_test:latest"
-            gcloud docker -- push "eu.gcr.io/${PROJECT_ID}/editor_test"
+            docker push "eu.gcr.io/${PROJECT_ID}/editor_test"
 
