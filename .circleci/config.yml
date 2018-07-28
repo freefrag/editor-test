@@ -24,6 +24,7 @@ jobs:
       GCLOUD_PROJECT_ID: scenic-style-210822
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: Store Service Account Key
           command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
