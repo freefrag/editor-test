@@ -1,33 +1,29 @@
 # Dropwizard Configuration File
 # See for details: https://dropwizard.github.io/dropwizard/manual/configuration.html
 
-database:
-  connection:
-    driverClass: org.postgresql.Driver
-    user: db_user
-    password: db_pass
-    url: jdbc:postgresql://localhost/dbname
-
 # =============================================
 #                Server Settings
 # =============================================
 # See for details: https://dropwizard.github.io/dropwizard/manual/configuration.html#servers
 server:
   applicationConnectors:
-    - type: http
-      port: 8000
     - type: https
       port: 8443
-      excludedProtocols: [SSLv3]
-      supportedProtocols: [TLSv1, TLSv1.1, TLSv1.2]
-      keyStorePath: var/conf/keyStore.jks
-      keyStorePassword: dropwizard-angular-gradle
+      supportedProtocols:
+        - TLSv1.2
+      excludedCipherSuites:
+        - SSL_RSA_WITH_DES_CBC_SHA
+        - SSL_DHE_RSA_WITH_DES_CBC_SHA
+        - SSL_DHE_DSS_WITH_DES_CBC_SHA
+        - SSL_RSA_EXPORT_WITH_RC4_40_MD5
+        - SSL_RSA_EXPORT_WITH_DES40_CBC_SHA
+        - SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA
+        - SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA
+        - TLS_DHE_DSS_WITH_AES_256_CBC_SHA256
+      keyStorePath: var/conf/example.keystore
+      keyStorePassword: example
       validateCerts: false
-  applicationContextPath: /
-  adminConnectors:
-    - type: http
-      port: 8001
-  adminContextPath: /
+  applicationContextPath: /test/
   requestLog:
     appenders:
       - type: file
@@ -36,7 +32,9 @@ server:
         archivedFileCount: 5
         timeZone: UTC
         threshold: INFO
-  rootPath: /api/*
+
+serviceDiscovery:
+  test-api: https://127.0.0.1:8080/api
 
 # See for details: https://dropwizard.github.io/dropwizard/manual/configuration.html#logging
 logging:
@@ -46,6 +44,6 @@ logging:
       archivedLogFilenamePattern: var/log/server-%d.log
       archivedFileCount: 5
       timeZone: UTC
-      threshold: INFO
+      threshold: DEBUG
     - type: console
-      threshold: INFO
+      threshold: DEBUG
