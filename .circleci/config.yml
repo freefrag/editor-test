@@ -26,10 +26,10 @@ jobs:
           - v1-dependencies-
       - run:
           name: Execute tests
-          commands: ./gradlew test
+          command: ./gradlew test
       - run:
           name: Build distribution
-          commands: ./gradlew distTar
+          command: ./gradlew distTar
       - save_cache:
           paths:
             - ~/.gradle
