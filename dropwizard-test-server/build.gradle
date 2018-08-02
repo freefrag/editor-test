@@ -11,6 +11,7 @@ apply plugin: 'org.inferred.processors'
 dependencies {
     runtime files('src/main/resources/app')
     compile project(':dropwizard-test-api')
+    compile project(':editor-test-grpc-api')
     compile 'io.dropwizard:dropwizard-assets'
     compile 'io.dropwizard:dropwizard-core'
     compile 'io.dropwizard:dropwizard-jdbi'

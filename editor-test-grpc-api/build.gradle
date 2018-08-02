@@ -1,0 +1,67 @@
+// =======
+// Plugins
+// =======
+apply from: "$rootDir/gradle/repositories.gradle"
+apply plugin: 'idea'
+apply plugin: 'com.google.protobuf'
+
+buildscript {
+  apply from: "$rootDir/gradle/repositories.gradle", to: buildscript
+
+  dependencies {
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.3'
+  }
+}
+
+[
+  "${projectDir}/generated_src/main/grpc",
+  "${projectDir}/generated_src/main/java"
+].each{ outputDir ->
+  project.idea.module.iml {
+    withXml {
+      def path = project.relativePath(outputDir)
+      def dirUrl = "file://\$MODULE_DIR\$/${path}"
+      def content = node.component.content[0]
+      if (content.find { it.url == dirUrl } == null) {
+        content.appendNode(
+            'sourceFolder', [
+                url          : dirUrl,
+                isTestSource : false,
+                generated    : "true"
+            ]
+        )
+      }
+    }
+  }
+}
+
+dependencies {
+    compile "com.google.api.grpc:proto-google-common-protos"
+    compile "io.grpc:grpc-alts"
+    compile "io.grpc:grpc-netty"
+    compile "io.grpc:grpc-protobuf"
+    compile "io.grpc:grpc-stub"
+    compileOnly "javax.annotation:javax.annotation-api"
+
+    // Used for TLS in HelloWorldServerTls
+    compile "io.netty:netty-tcnative-boringssl-static"
+
+    compile "com.google.protobuf:protobuf-java-util"
+
+    testCompile "io.grpc:grpc-testing"
+    testCompile "junit:junit"
+    testCompile "org.mockito:mockito-core"
+}
+
+protobuf {
+    protoc { artifact = "com.google.protobuf:protoc:3.6.0" }
+    plugins {
+        grpc { artifact = "io.grpc:protoc-gen-grpc-java:1.14.0" }
+    }
+    generateProtoTasks.generatedFilesBaseDir = "${projectDir}/generated_src"
+    generateProtoTasks {
+        ofSourceSet('main')*.plugins {
+          grpc {}
+        }
+    }
+}
